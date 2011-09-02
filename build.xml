@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<project name="antwebproject"   default="war" basedir=".">
+<property name="classes" value="build/classes"/>
+    <property name="build" value="build"/>
+    <property name="lib" value="WebRoot/WEB-INF/lib"/>
+    <!-- ..build..-->
+    <target name="clean">
+       <delete dir="build"/>
+    </target>
+
+    <!-- ..build/classes......class...build/classes...-->
+    <target name="compile" depends="clean">
+       <mkdir dir="${classes}"/>
+
+       <javac srcdir="src" destdir="${classes}"/>
+    </target>
+
+    <!-- .war.-->
+    <target name="war" depends="compile">
+<war destfile="${build}/antwebproject.war" webxml="WebRoot/WEB-INF/web.xml">
+           <!-- ..WebRoot...WEB-INF.META-INF......-->
+    <fileset dir="WebRoot" includes="**/*.jsp"/>
+
+           <!-- ..lib....jar.-->
+           <lib dir="${lib}"/>
+           <!-- ..build/classes..class..-->
+           <classes dir="${classes}"/>
+       </war>
+    </target>
+</project>
+
